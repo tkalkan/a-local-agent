@@ -11,7 +11,7 @@ const CONFIG = {
   port: 3001,
   wsPort: 3002,
   serverUrl: process.env.SERVER_URL || 'http://localhost:5000',
-  defaultPrinterHost: process.env.PRINTER_ADDRESS || 'localhost:9100',
+  defaultPrinterHost: process.env.PRINTER_ADDRESS || '192.168.2.38:9100',
   printerDiscoveryTimeout: 5000,
   maxRetries: 3,
   retryDelay: 2000,
@@ -22,7 +22,7 @@ let connectedPrinters = new Map();
 let serverConnection = null;
 let healthCheckTimer = null;
 let restartCount = 0;
-const MAX_RESTART_ATTEMPTS = 10;
+const MAX_RESTART_ATTEMPTS = 100;
 
 class AndroidPrintAgent {
   constructor() {
