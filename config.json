@@ -1,0 +1,67 @@
+{
+  "port": 3001,
+  "wsPort": 3002,
+  "serverUrl": "http://192.168.1.100:5000",
+  "printerDiscoveryTimeout": 5000,
+  "maxRetries": 3,
+  "retryDelay": 2000,
+  "healthCheckInterval": 30000,
+  "autoStart": true,
+  "debugMode": false,
+  "protocols": {
+    "raw_tcp": {
+      "enabled": true,
+      "timeout": 10000,
+      "retries": 3
+    },
+    "websocket": {
+      "enabled": true,
+      "timeout": 10000,
+      "retries": 2
+    },
+    "http": {
+      "enabled": true,
+      "timeout": 15000,
+      "retries": 2
+    }
+  },
+  "turkish_chars": {
+    "encoding": "cp857",
+    "fallback_encoding": "cp1254",
+    "char_mapping": {
+      "ç": "\\x87", "Ç": "\\x80",
+      "ğ": "\\x83", "Ğ": "\\xA6",
+      "ı": "\\x8D", "İ": "\\x98",
+      "ö": "\\x94", "Ö": "\\x99",
+      "ş": "\\x9F", "Ş": "\\x9E",
+      "ü": "\\x81", "Ü": "\\x9A"
+    }
+  },
+  "printers": [
+    {
+      "id": "default",
+      "name": "Default Printer",
+      "host": "192.168.1.100",
+      "port": 9100,
+      "protocol": "raw",
+      "format": "escpos",
+      "enabled": true,
+      "isDefault": true
+    }
+  ],
+  "discovery": {
+    "enabled": true,
+    "broadcast_ports": [8255, 9100],
+    "scan_ranges": [
+      "192.168.1.0/24",
+      "192.168.0.0/24",
+      "10.0.0.0/24"
+    ],
+    "common_addresses": [
+      "192.168.1.100:9100",
+      "192.168.1.200:9100",
+      "192.168.0.100:9100",
+      "192.168.178.54:9100"
+    ]
+  }
+}

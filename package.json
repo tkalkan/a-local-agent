@@ -1,0 +1,44 @@
+{
+  "name": "hilfex-android-print-agent",
+  "version": "2.0.0",
+  "description": "Android Local Print Agent for HilfeX Restaurant System - Lenovo Tablet Compatible",
+  "main": "agent.js",
+  "scripts": {
+    "start": "node agent.js",
+    "dev": "nodemon agent.js",
+    "setup": "node setup.js",
+    "test-printer": "node test-printer.js",
+    "install-termux": "bash install-termux.sh"
+  },
+  "keywords": [
+    "android",
+    "print",
+    "agent",
+    "restaurant",
+    "pos",
+    "termux",
+    "lenovo"
+  ],
+  "author": "HilfeX Digital Menu System",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "node-fetch": "^3.3.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "termux": {
+    "required_packages": [
+      "nodejs",
+      "git",
+      "curl",
+      "wget"
+    ]
+  }
+}
