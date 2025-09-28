@@ -10,7 +10,8 @@ const os = require('os');
 const CONFIG = {
   port: 3001,
   wsPort: 3002,
-  serverUrl: process.env.SERVER_URL || 'http://192.168.1.100:5000',
+  serverUrl: process.env.SERVER_URL || 'http://localhost:5000',
+  defaultPrinterHost: process.env.PRINTER_ADDRESS || 'localhost:9100',
   printerDiscoveryTimeout: 5000,
   maxRetries: 3,
   retryDelay: 2000,
@@ -220,13 +221,21 @@ class AndroidPrintAgent {
   }
 
   async printWithProtocol(data, printer, protocol, format) {
-    const printerConfig = printer || { 
-      host: '192.168.1.100', 
-      port: 9100, 
-      name: 'default' 
-    };
+    // Dinamik yazıcı konfigürasyonu - ortam değişkenlerinden al
+    let printerConfig;
+    if (printer && printer.host) {
+      printerConfig = printer;
+    } else {
+      // Environment'tan yazıcı IP'sini al
+      const [host, port] = CONFIG.defaultPrinterHost.split(':');
+      printerConfig = {
+        host: host || 'localhost',
+        port: parseInt(port) || 9100,
+        name: 'system-default'
+      };
+    }
 
-    console.log(`Printing via ${protocol}/${format} to ${printerConfig.host}:${printerConfig.port}`);
+    console.log(`🖨️ Printing via ${protocol}/${format} to ${printerConfig.host}:${printerConfig.port}`);
 
     switch (protocol.toLowerCase()) {
       case 'websocket':
